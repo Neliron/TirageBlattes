@@ -21,6 +21,7 @@ const bagNumbers = [3, 3, 6, 6, 12];
 let bag = [];
 let blattesArray = [];
 const blattesString = ref("");
+const bagCount = ref(0);
 
 function resetBag() {
   bag = [];
@@ -31,6 +32,7 @@ function resetBag() {
       bag.push(bagNames[i]);
     }
   }
+  bagCount.value = bag.length;
 }
 
 function draw() {
@@ -39,6 +41,7 @@ function draw() {
   blattesArray.push(bag.pop());
   blattesString.value = blattesArray.toString();
   console.log(blattesArray);
+  bagCount.value = bag.length;
 }
 
 function shuffle(array) {
@@ -74,6 +77,7 @@ function getImage(image) {
   <div class="reset">
     <button @click="resetBag">Ranger les blattes</button>
   </div>
+  <div class="content">Blattes dans le sac : {{ bagCount }}</div>
 </template>
 
 <style scoped>
@@ -85,7 +89,13 @@ function getImage(image) {
 
 .draw,
 .result,
-.reset {
+.reset,
+.content {
   text-align: center;
+}
+
+button {
+  margin: 10px;
+  height: 50px;
 }
 </style>

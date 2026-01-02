@@ -1,0 +1,12 @@
+{
+  "name": "Sac de blattes",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "action": {
+    "title": "Sac de blattes",
+    "icon": "/icon.svg",
+    "popover": "/",
+    "height": 600,
+    "width": 400
+  }
+}

@@ -18,6 +18,7 @@ function updateData() {
 
 onMounted(() => {
   resetBag();
+  watchEffect();
 });
 
 watchEffect(() => {

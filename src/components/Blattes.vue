@@ -10,7 +10,10 @@ function updateData() {
     [ID + "/" + "bag"]: bag,
     [ID + "/" + "blattesArray"]: blattesArray,
   });
-  console.log("Data sent ! " + OBR.room.getMetadata().value);
+  console.log("Data sent ! ");
+  OBR.room.getMetadata().then((metadata) => {
+    console.log(metadata);
+  });
 }
 
 onMounted(() => {

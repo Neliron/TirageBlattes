@@ -4,7 +4,7 @@ import Blattes from "./components/Blattes.vue";
 
 <template>
   <main>
-    <Blattes msg="Bonjour !" />
+    <Blattes />
   </main>
 </template>
 

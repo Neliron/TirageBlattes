@@ -13,13 +13,6 @@ function updateData() {
   console.log("Data sent !");
 }
 
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
-});
-
 onMounted(() => {
   resetBag();
   subscribeMetadata();
@@ -78,6 +71,7 @@ function shuffle(array) {
 }
 
 function subscribeMetadata() {
+  console.log("Subscribing to metadata changes.");
   OBR.room.onMetadataChange((metadata) => {
     console.log("Receiving data...");
     bag = metadata[ID + "/" + "bag"];

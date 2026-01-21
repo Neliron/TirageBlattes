@@ -17,7 +17,7 @@ onMounted(() => {
   resetBag();
 });
 
-watchEffect(
+useEffect(
   () =>
     OBR.room.onMetadataChange((metadata) => {
       console.log("Receiving data...");

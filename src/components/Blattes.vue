@@ -15,8 +15,18 @@ function updateData() {
 
 onMounted(() => {
   resetBag();
-  subscribeMetadata();
 });
+
+watchEffect(
+  () =>
+    OBR.room.onMetadataChange((metadata) => {
+      console.log("Receiving data...");
+      bag = metadata[ID + "/" + "bag"];
+      blattesArray = metadata[ID + "/" + "blattesArray"];
+      console.log("Data received !");
+    }),
+  []
+);
 
 const bagNames = [
   '<p style="color:black;">Blatte noire (échec critique)</p>',
@@ -68,17 +78,6 @@ function shuffle(array) {
       array[currentIndex],
     ];
   }
-}
-
-function subscribeMetadata() {
-  console.log("Subscribing to metadata changes.");
-  OBR.room.onMetadataChange((metadata) => {
-    console.log("Receiving data...");
-    bag = metadata[ID + "/" + "bag"];
-    blattesArray = metadata[ID + "/" + "blattesArray"];
-    console.log("Data received !");
-    subscribeMetadata();
-  });
 }
 </script>
 

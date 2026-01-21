@@ -12,23 +12,22 @@ function updateData() {
   });
   console.log("Data sent ! ");
   OBR.room.getMetadata().then((metadata) => {
-    console.log(metadata);
+    console.log(metadata[ID + "/" + "bag"]);
   });
 }
 
 onMounted(() => {
   resetBag();
-  watchEffect();
 });
 
-watchEffect(() => {
+watchEffect(() =>
   OBR.room.onMetadataChange((metadata) => {
     console.log("Receiving data...");
     bag = metadata[ID + "/" + "bag"];
     blattesArray = metadata[ID + "/" + "blattesArray"];
     console.log("Data received !");
-  });
-});
+  })
+);
 
 const bagNames = [
   '<p style="color:black;">Blatte noire (échec critique)</p>',

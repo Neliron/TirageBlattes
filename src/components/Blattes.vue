@@ -21,7 +21,7 @@ onMounted(() => {
 });
 
 watchEffect(() =>
-  OBR.room.getMetadata().then((metadata) => {
+  OBR.room.onMetadataChange((metadata) => {
     console.log("Receiving data...");
     bag = metadata[ID + "/" + "bag"];
     blattesArray = metadata[ID + "/" + "blattesArray"];

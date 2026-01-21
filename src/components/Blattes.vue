@@ -1,12 +1,26 @@
 <script setup>
-import { ref } from "vue";
-import BlattesImage from "@/components/BlattesImage.vue";
+import { onMounted, ref } from "vue";
+import OBR from "@owlbear-rodeo/sdk";
+
+const ID = "com.tutorial.blatteBag";
+
+function updateData() {
+  OBR.scene.setMetadata({
+    [ID + "/" + "bag"]: bag,
+    [ID + "/" + "blattesArray"]: blattesArray,
+  });
+}
 
 defineProps({
   msg: {
     type: String,
     required: true,
   },
+});
+
+onMounted(() => {
+  resetBag();
+  subscribeMetadata();
 });
 
 const bagNames = [
@@ -33,15 +47,17 @@ function resetBag() {
     }
   }
   bagCount.value = bag.length;
+  updateData();
+  OBR.broadcast.sendMessage("Bag reset !");
 }
 
 function draw() {
   shuffle(bag);
-  console.log(bag);
   blattesArray.push(bag.pop());
   blattesString.value = blattesArray.toString();
-  console.log(blattesArray);
   bagCount.value = bag.length;
+  updateData();
+  OBR.broadcast.sendMessage("Bead drew !");
 }
 
 function shuffle(array) {
@@ -61,8 +77,12 @@ function shuffle(array) {
   }
 }
 
-function getImage(image) {
-  return require(image);
+function subscribeMetadata() {
+  OBR.scene.onMetadataChange((metadata) => {
+    bag = metadata[ID + "/" + "bag"];
+    blattesArray = metadata[ID + "/" + "blattesArray"];
+    subscribeMetadata();
+  });
 }
 </script>
 

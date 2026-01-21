@@ -35,8 +35,4 @@ header {
     flex-wrap: wrap;
   }
 }
-
-template {
-  opacity: 50%;
-}
 </style>

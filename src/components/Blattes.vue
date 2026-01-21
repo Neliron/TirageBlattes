@@ -5,10 +5,12 @@ import OBR from "@owlbear-rodeo/sdk";
 const ID = "com.tutorial.blatteBag";
 
 function updateData() {
+  console.log("Sending data...");
   OBR.room.setMetadata({
     [ID + "/" + "bag"]: bag,
     [ID + "/" + "blattesArray"]: blattesArray,
   });
+  console.log("Data sent !");
 }
 
 defineProps({
@@ -77,8 +79,10 @@ function shuffle(array) {
 
 function subscribeMetadata() {
   OBR.room.onMetadataChange((metadata) => {
+    console.log("Receiving data...");
     bag = metadata[ID + "/" + "bag"];
     blattesArray = metadata[ID + "/" + "blattesArray"];
+    console.log("Data received !");
     subscribeMetadata();
   });
 }

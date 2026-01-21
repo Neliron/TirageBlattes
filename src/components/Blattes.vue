@@ -10,22 +10,20 @@ function updateData() {
     [ID + "/" + "bag"]: bag,
     [ID + "/" + "blattesArray"]: blattesArray,
   });
-  console.log("Data sent !");
+  console.log("Data sent ! " + OBR.room.getMetadata()[ID + "/" + "bag"]);
 }
 
 onMounted(() => {
   resetBag();
 });
 
-watchEffect(
-  () =>
-    OBR.room.onMetadataChange((metadata) => {
-      console.log("Receiving data...");
-      bag = metadata[ID + "/" + "bag"];
-      blattesArray = metadata[ID + "/" + "blattesArray"];
-      console.log("Data received !");
-    }),
-  []
+watchEffect(() =>
+  OBR.room.onMetadataChange((metadata) => {
+    console.log("Receiving data...");
+    bag = metadata[ID + "/" + "bag"];
+    blattesArray = metadata[ID + "/" + "blattesArray"];
+    console.log("Data received !");
+  })
 );
 
 const bagNames = [

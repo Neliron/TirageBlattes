@@ -5,7 +5,7 @@ import OBR from "@owlbear-rodeo/sdk";
 const ID = "com.tutorial.blatteBag";
 
 function updateData() {
-  OBR.scene.setMetadata({
+  OBR.room.setMetadata({
     [ID + "/" + "bag"]: bag,
     [ID + "/" + "blattesArray"]: blattesArray,
   });
@@ -48,7 +48,6 @@ function resetBag() {
   }
   bagCount.value = bag.length;
   updateData();
-  OBR.broadcast.sendMessage("Bag reset !");
 }
 
 function draw() {
@@ -57,7 +56,6 @@ function draw() {
   blattesString.value = blattesArray.toString();
   bagCount.value = bag.length;
   updateData();
-  OBR.broadcast.sendMessage("Bead drew !");
 }
 
 function shuffle(array) {
@@ -78,7 +76,7 @@ function shuffle(array) {
 }
 
 function subscribeMetadata() {
-  OBR.scene.onMetadataChange((metadata) => {
+  OBR.room.onMetadataChange((metadata) => {
     bag = metadata[ID + "/" + "bag"];
     blattesArray = metadata[ID + "/" + "blattesArray"];
     subscribeMetadata();

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import OBR from "@owlbear-rodeo/sdk";
 
 const ID = "com.tutorial.blatteBag";
@@ -17,7 +17,7 @@ onMounted(() => {
   resetBag();
 });
 
-useEffect(
+watchEffect(
   () =>
     OBR.room.onMetadataChange((metadata) => {
       console.log("Receiving data...");

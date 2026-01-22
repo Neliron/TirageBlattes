@@ -16,18 +16,17 @@ function updateData() {
   });
 }
 
-onMounted(() => {
+OBR.onReady(() => {
   resetBag();
+  watchEffect(() =>
+    OBR.room.onMetadataChange((metadata) => {
+      console.log("Receiving data...");
+      bag = metadata[ID + "/" + "bag"];
+      blattesArray = metadata[ID + "/" + "blattesArray"];
+      console.log("Data received !");
+    })
+  );
 });
-
-watchEffect(() =>
-  OBR.room.onMetadataChange((metadata) => {
-    console.log("Receiving data...");
-    bag = metadata[ID + "/" + "bag"];
-    blattesArray = metadata[ID + "/" + "blattesArray"];
-    console.log("Data received !");
-  })
-);
 
 const bagNames = [
   '<p style="color:black;">Blatte noire (échec critique)</p>',

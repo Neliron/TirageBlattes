@@ -20,7 +20,7 @@ OBR.onReady(() => {
       bagCount.value = bag.length;
     })
   );
-  if (!bag) resetBag();
+  if (bagCount.value == 0) resetBag();
 });
 
 const bagNames = [

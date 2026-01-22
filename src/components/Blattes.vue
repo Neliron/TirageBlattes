@@ -5,14 +5,9 @@ import OBR from "@owlbear-rodeo/sdk";
 const ID = "com.tutorial.blatteBag";
 
 function updateData() {
-  console.log("Sending data...");
   OBR.room.setMetadata({
     [ID + "/" + "bag"]: bag,
     [ID + "/" + "blattesArray"]: blattesArray,
-  });
-  console.log("Data sent ! ");
-  OBR.room.getMetadata().then((metadata) => {
-    console.log(metadata[ID + "/" + "bag"]);
   });
 }
 
@@ -20,10 +15,10 @@ OBR.onReady(() => {
   resetBag();
   watchEffect(() =>
     OBR.room.onMetadataChange((metadata) => {
-      console.log("Receiving data...");
       bag = metadata[ID + "/" + "bag"];
       blattesArray = metadata[ID + "/" + "blattesArray"];
-      console.log("Data received !");
+      blattesString.value = blattesArray.toString();
+      bagCount.value = bag.length;
     })
   );
 });

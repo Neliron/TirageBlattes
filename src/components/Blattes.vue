@@ -11,6 +11,17 @@ function updateData() {
   });
 }
 
+function initializeMetadata() {
+  OBR.room.getMetadata().then((metadata) => {
+    bag = metadata[ID + "/" + "bag"];
+    blattesArray = metadata[ID + "/" + "blattesArray"];
+    blattesString.value = blattesArray.toString();
+    bagCount.value = bag.length;
+
+    if (bagCount.value == 0) resetBag();
+  });
+}
+
 OBR.onReady(() => {
   watchEffect(() =>
     OBR.room.onMetadataChange((metadata) => {
@@ -20,7 +31,7 @@ OBR.onReady(() => {
       bagCount.value = bag.length;
     })
   );
-  if (bagCount.value == 0) resetBag();
+  initializeMetadata();
 });
 
 const bagNames = [

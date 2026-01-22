@@ -12,7 +12,6 @@ function updateData() {
 }
 
 OBR.onReady(() => {
-  resetBag();
   watchEffect(() =>
     OBR.room.onMetadataChange((metadata) => {
       bag = metadata[ID + "/" + "bag"];
@@ -21,6 +20,7 @@ OBR.onReady(() => {
       bagCount.value = bag.length;
     })
   );
+  if (!bag) resetBag();
 });
 
 const bagNames = [
